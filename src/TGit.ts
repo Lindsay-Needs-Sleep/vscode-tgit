@@ -6,6 +6,11 @@ import * as fs from 'fs';
 import * as child_process from 'child_process';
 
 export class TGit {
+    static log: vscode.LogOutputChannel;
+
+    public static setLogger(logger: vscode.LogOutputChannel) {
+        this.log = logger;
+    }
 
     public static fetch(){
         this.run("fetch");
@@ -109,14 +114,15 @@ export class TGit {
 
     private static run(command: string, withFilePath: boolean = false, filePathRequired: boolean = false, additionalParams: string = ""){
         let path = this.getWorkingPath(withFilePath, filePathRequired);
-path = this.getTortoiseGitFriendlyPath(path);
+        path = this.getTortoiseGitFriendlyPath(path);
         if (!path || path == "."){
             vscode.window.showErrorMessage(`The '${command}' command requires an existing file ${filePathRequired ? "" : "or folder"} to be open.`);
             return;
         }
-
+        
         const launcherPath = vscode.workspace.getConfiguration("tgit").get("launcherPath");
         let cmd = `"${launcherPath}" /command:${command} /path:"${path}"`;
+        this.log.info(`${cmd}`);
         if (additionalParams){
             cmd += " " + additionalParams;
         }
