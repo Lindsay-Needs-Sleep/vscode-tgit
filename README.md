@@ -49,6 +49,8 @@ Since the default shortcuts will make Ctrl+G (Go To Line) inaccessible, you can 
 This extension contributes the `tgit.launcherPath` setting, specifying the full path to `TortoiseGitProc.exe`.
 It is set to the default installation path of TortoiseGit, so you might need to adjust it if you installed elsewhere.
 
+`tgit.workspaceFolderOverride` is intended for devcontainer users. Specify your local workspace path that TortoiseGit will understand.  eg. `"C:\\Users\\<user>\\repos\\<project>"` (must escape backslashes)
+
 ---
 
 ## Running the code

@@ -107,7 +107,8 @@ export class TGit {
     }
 
     private static run(command: string, withFilePath: boolean = false, filePathRequired: boolean = false, additionalParams: string = null){
-        const path = this.getWorkingPath(withFilePath, filePathRequired);
+        let path = this.getWorkingPath(withFilePath, filePathRequired);
+path = this.getTortoiseGitFriendlyPath(path);
         if (!path || path == "."){
             vscode.window.showErrorMessage(`The '${command}' command requires an existing file ${filePathRequired ? "" : "or folder"} to be open.`);
             return;
@@ -161,5 +162,47 @@ export class TGit {
 
     private static getWorkingFile() : string {
         return vscode.window.activeTextEditor?.document.fileName;
+    }
+
+    /**
+     * Replaces the workspace folder with tgit.workspaceFolderOverride if it
+     * exists and if we're running in a remote environment.
+     * eg. replace /workspace/<project> with C:\Users\<user>\repos\<project>.
+     * This is meant for devcontainer users so that we can return 
+     * tortoisgit-friendly paths.
+     * Note for future devs: ENV variables instead of settings.json don't 
+     * really work because process.env is the windows/host process. It might be
+     * possible to read devcontainer env variables by spinning up a terminal,
+     * and echoing/outputting/reading the env variable. But that's ugly and the
+     * user would also have to do something like modify devcontainer.json:
+     * "remoteEnv": { "OVERRIDE_WORKSPACE_FOLDER": "${localWorkspaceFolder}" }
+     * to set the ENV var.
+     * @returns the full path to the workspace
+     */
+    private static getTortoiseGitFriendlyPath(containerFilePath: string): string {
+        // get tgit.workspaceFolderOverride settings.json
+        const workspaceFolderOverride = vscode.workspace.getConfiguration('tgit').get<string>('workspaceFolderOverride');
+        
+        // if we're not in a remote env (devcontainer), or there is no override
+        if (!vscode.env.remoteName || !workspaceFolderOverride || workspaceFolderOverride.trim().length === 0) {
+            // just return the container path
+            return containerFilePath;
+        }
+
+        // Need to replace the workspace folder with the override
+
+        // Is the override windows? (If override contains backslashes or starts with a drive letter C:\)
+        const overrideIsWindows = /\\/.test(workspaceFolderOverride) || /^[a-zA-Z]:/.test(workspaceFolderOverride);
+
+        // Get the path relative to the client workspace folder
+        const containerRoot = this.getWorkingFolder();
+        const relative = path.relative(containerRoot, containerFilePath);
+        const segments = relative.split(path.sep);
+
+        // append the relative path segments to the workspace folder override
+        if (overrideIsWindows) 
+            return path.win32.join(workspaceFolderOverride, ...segments);
+        else
+            return path.posix.join(workspaceFolderOverride, ...segments);
     }
 }
