@@ -3,6 +3,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
+import * as child_process from 'child_process';
 
 export class TGit {
 
@@ -106,7 +107,7 @@ export class TGit {
         this.run("bisect /reset");
     }
 
-    private static run(command: string, withFilePath: boolean = false, filePathRequired: boolean = false, additionalParams: string = null){
+    private static run(command: string, withFilePath: boolean = false, filePathRequired: boolean = false, additionalParams: string = ""){
         let path = this.getWorkingPath(withFilePath, filePathRequired);
 path = this.getTortoiseGitFriendlyPath(path);
         if (!path || path == "."){
@@ -119,11 +120,11 @@ path = this.getTortoiseGitFriendlyPath(path);
         if (additionalParams){
             cmd += " " + additionalParams;
         }
-        require("child_process").exec(cmd);
+        child_process.exec(cmd);
     }
 
     private static getWorkingPath(preferFilePath: boolean, filePathRequired: boolean): string {
-        let path = (preferFilePath ? this.getWorkingFile() : null);
+        let path = (preferFilePath ? this.getWorkingFile() : "");
         if (filePathRequired) {
             return path;
         }
@@ -135,12 +136,12 @@ path = this.getTortoiseGitFriendlyPath(path);
 
     private static getRootGitFolder(currentFolder: string) : string {
         if (!currentFolder){
-            return null;
+            return "";
         }
         while (!fs.existsSync(currentFolder + path.sep + ".git")) {
             let parentDir = path.dirname(currentFolder);
             if (currentFolder == parentDir){
-                currentFolder = null;
+                currentFolder = "";
                 break;
             }
             else {
@@ -152,16 +153,17 @@ path = this.getTortoiseGitFriendlyPath(path);
 
     private static getWorkingFolder() : string { 
         const workspaceFolders = vscode.workspace.workspaceFolders;
-        return (workspaceFolders && workspaceFolders.length) ? workspaceFolders[0].uri.fsPath : null;
+        return (workspaceFolders && workspaceFolders.length) ? workspaceFolders[0].uri.fsPath : "";
     }
 
     private static getWorkingFileFolder() : string {
         const currentFile = this.getWorkingFile();
-        return currentFile ? path.dirname(currentFile) : null;
+        return currentFile ? path.dirname(currentFile) : "";
     }
 
     private static getWorkingFile() : string {
-        return vscode.window.activeTextEditor?.document.fileName;
+        const activeTextEditor = vscode.window.activeTextEditor;
+        return activeTextEditor ? activeTextEditor.document.fileName : "";
     }
 
     /**

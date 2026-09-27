@@ -258,9 +258,12 @@
     "vscode:publish": "vsce publish"
   },
   "devDependencies": {
-    "@types/node": "^10.17.49",
-    "@types/vscode": "^1.52.0",
-    "typescript": "^3.9.7",
-    "vsce": "^1.83.0"
+    "@types/node": "^26.6.3",
+    "@types/vscode": "^1.138.0",
+    "@vscode/vsce": "^4.0.0",
+    "typescript": "^5.9.3"
+  },
+  "allowScripts": {
+    "@vscode/vsce-sign@2.1.0": true
   }
 }
