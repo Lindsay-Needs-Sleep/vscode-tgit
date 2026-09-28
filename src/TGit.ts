@@ -126,10 +126,10 @@ export class TGit {
         
         const launcherPath = vscode.workspace.getConfiguration("tgit").get("launcherPath");
         let cmd = `"${launcherPath}" /command:${command} /path:"${path}"`;
-        this.log.info(`${cmd}`);
         if (additionalParams){
             cmd += " " + additionalParams;
         }
+        this.log.info(`${cmd}`);
         child_process.exec(cmd);
     }
 
@@ -209,7 +209,11 @@ export class TGit {
         // Get the path relative to the client workspace folder
         const containerRoot = this.getWorkingFolder();
         const relative = path.relative(containerRoot, containerFilePath);
-        const segments = relative.split(path.sep);
+        let segments = relative.split(path.sep);
+
+        // path.relative messes up if containerFilePath is ""
+        if (containerFilePath === "")
+            segments = [];
 
         // append the relative path segments to the workspace folder override
         if (overrideIsWindows) 
