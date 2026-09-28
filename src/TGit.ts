@@ -49,7 +49,7 @@ export class TGit {
     }
 
     public static diff(){
-        this.run("diff", true);
+        this.run("diff", true, true);
     }
 
     public static diffRepo() {
