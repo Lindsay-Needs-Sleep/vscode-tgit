@@ -25,6 +25,7 @@ Global shortcuts:
 * `(G)it S(y)nc` - Ctrl+S, Ctrl+Y
 * `(G)it Clea(n)up` - Ctrl+G, Ctrl+N
 * `(G)it Repository (D)iff` - Ctrl+G, Ctrl+D
+* `(G)it Revision (G)raph` - Ctrl+G, Ctrl+G
 
 Current file shortcuts:
 
@@ -39,9 +40,9 @@ Bisect commands are also available, but with no preset shortcuts.
 
 ### Shortcut conflicts
 
-Since the default shortcuts will make Ctrl+G (Go To Line) inaccessible, you can change them, or just change the one for "Go To Line" to be e.g. Ctrl+G, Ctrl+G:
+Since the default shortcuts will make Ctrl+G (Go To Line) inaccessible, you can change them, or just change the one for "Go To Line" to be e.g. Ctrl+G, Ctrl+T:
 ```javascript
-{ "key": "Ctrl+g Ctrl+g", "command": "workbench.action.gotoLine" }
+{ "key": "Ctrl+g Ctrl+t", "command": "workbench.action.gotoLine" }
 ```
 
 ## Extension Settings

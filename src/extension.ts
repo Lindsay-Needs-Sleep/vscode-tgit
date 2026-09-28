@@ -32,6 +32,7 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.commands.registerCommand("tgit.bisectReset", () => TGit.bisectReset()));
     context.subscriptions.push(vscode.commands.registerCommand("tgit.cleanup", () => TGit.cleanup()));
     context.subscriptions.push(vscode.commands.registerCommand("tgit.diffRepo", () => TGit.diffRepo()));
+    context.subscriptions.push(vscode.commands.registerCommand("tgit.revisionGraph", () => TGit.revisionGraph()));
 }
 
 export function deactivate() {

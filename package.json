@@ -247,6 +247,10 @@
       {
         "command": "tgit.sync",
         "key": "ctrl+g ctrl+y"
+      },
+      {
+        "command": "tgit.revisionGraph",
+        "key": "ctrl+g ctrl+g"
       }
     ]
   },

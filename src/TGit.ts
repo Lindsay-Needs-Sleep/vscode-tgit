@@ -56,6 +56,10 @@ export class TGit {
         this.run("diff");
     }
 
+    public static revisionGraph() {
+        this.run("revisiongraph");
+    }
+
     public static blame(){
         let line = 1;
         if (vscode.window.activeTextEditor){
