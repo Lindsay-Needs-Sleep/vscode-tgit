@@ -195,8 +195,12 @@ export class TGit {
         // get tgit.workspaceFolderOverride settings.json
         const workspaceFolderOverride = vscode.workspace.getConfiguration('tgit').get<string>('workspaceFolderOverride');
         
-        // if we're not in a remote env (devcontainer), or there is no override
-        if (!vscode.env.remoteName || !workspaceFolderOverride || workspaceFolderOverride.trim().length === 0) {
+        // if there is no override
+        if (!workspaceFolderOverride || workspaceFolderOverride.trim().length === 0) {
+            // but we're not in a remote env (devcontainer)
+            if (vscode.env.remoteName) {
+                vscode.window.showErrorMessage("You appear to be in a remote env (devcontainer?), but haven't set tgit.workspaceFolderOverride, tgit-cmds will likely not work.");
+            }
             // just return the container path
             return containerFilePath;
         }
