@@ -65,11 +65,11 @@
           "default": "C:\\Program Files\\TortoiseGit\\bin\\TortoiseGitProc.exe",
           "description": "Path to the TortoiseGit command launcher (TortoiseGitProc.exe)."
         },
-        "tgit.workspaceFolderOverride": {
-          "type": "string",
+        "tgit.remotePathOverrides": {
+          "type": "array",
           "default": "",
           "scope": "resource",
-          "description": "Intended for devcontainer users. Specify the TortoiseGit-friendly path to your project (most likely the windows path to your project). eg. \"C:\\Users\\<user>\\repos\\<project>\" (must escape backslashes)"
+          "description": "Allows your to replace remotePath portion of a filePath with a localPath that TortoiseGit can find. Supports multiple definitions for multi-folder workspaces. Example definition: [{\"remotePath\": \"/workspaces/<project>\", \"localPath\": \"C:\\Users\\<user>\\repos\\<project>\"}]"
         }
       }
     },
