@@ -1,3 +1,14 @@
+## 1.5.0
+
+- Added devcontainer support via `settings.json` `tgit.remotePathOverrides`
+  - may also work for supporting other remote environments
+- Support multi-folder workspaces
+  - If a command is issued on a file in project-folder #2, then it should open the TortoiseGit UI for project #2, not project #1
+- Added Git Revision Graph (ctrl+g, ctrl+g)
+- Added Output panel info/warnings/errors to help the user
+- Strictly differentiate "Diff" vs "File Diff"
+  - "File Diff" should try to open a file diff, if there is no valid file it should fail, not open the unexpected project diff.
+
 ## 1.4.2
 
 - Extension will only run locally, i.e. not attempt to run on remote hosts
