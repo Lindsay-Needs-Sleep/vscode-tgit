@@ -22,14 +22,14 @@ Global shortcuts:
 * `(G)it Stash-P(o)p` - Ctrl+G, Ctrl+O
 * `(G)it Stash-S(a)ve` - Ctrl+G, Ctrl+A
 * `(G)it (S)witch` - Ctrl+G, Ctrl+S
-* `(G)it S(y)nc` - Ctrl+S, Ctrl+Y
+* `(G)it S(y)nc` - Ctrl+G, Ctrl+Y
 * `(G)it Clea(n)up` - Ctrl+G, Ctrl+N
 * `(G)it Repository (D)iff` - Ctrl+G, Ctrl+D
+* `(G)it R(e)solve Conflicts` - Ctrl+G, Ctrl+E
 * `(G)it Revision (G)raph` - Ctrl+G, Ctrl+G
 
 Current file shortcuts:
 
-* `(G)it R(e)solve` - Ctrl+G, Ctrl+E
 * `(G)it File (L)og` - Ctrl+Shift+Alt+G, Ctrl+Shift+Alt+L
 * `(G)it File (B)lame` - Ctrl+Shift+Alt+G, Ctrl+Shift+Alt+B
 * `(G)it File (D)iff` - Ctrl+Shift+Alt+G, Ctrl+Shift+Alt+D

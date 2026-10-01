@@ -37,7 +37,7 @@ export class TGit {
     }
 
     public static resolve(){
-        this.run("resolve", true);
+        this.run("resolve");
     }
 
     public static switch(){

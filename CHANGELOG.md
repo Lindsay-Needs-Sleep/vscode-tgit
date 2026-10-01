@@ -1,3 +1,7 @@
+## 1.5.1
+
+- tgit.resolve is repo-level only. file-level opens the same dialog, but filtered to only show the current file, and only if it's conflicted.  Repo-level just shows all conflicted files.
+
 ## 1.5.0
 
 - Added devcontainer support via `settings.json` `tgit.remotePathOverrides`
