@@ -304,10 +304,12 @@ export class TGit {
     }
 
     private static isChildPath(parent : string, child : string): Boolean {
-        const pathOS = this.getOSPathModuleForFilePath(parent);
-        const relative = pathOS.relative(parent, child);
+        const parentOS = this.getOSPathModuleForFilePath(parent);
+        const childOS = this.getOSPathModuleForFilePath(child);
+        if (parentOS !== childOS) return false;
+        const relative = parentOS.relative(parent, child);
         if (relative == "") return true; // the parent and the child are the same path
-        return relative && !relative.startsWith('..') && !pathOS.isAbsolute(relative);
+        return relative && !relative.startsWith('..') && !parentOS.isAbsolute(relative);
     }
 
     private static getOSPathModuleForFilePath(filePath : string) {

@@ -1,3 +1,7 @@
+## 1.6.1
+
+- Fix infinite loop bug where fs would incorrectly calculate a wine-friendly (fake windows path) as being a child of a linux path.
+
 ## 1.6.0
 
 - Support for linux PCs that have TortoiseGit installed (probably through wine).

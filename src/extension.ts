@@ -6,6 +6,7 @@ import { TGit } from './TGit';
 export function activate(context: vscode.ExtensionContext) {
     const log = vscode.window.createOutputChannel('TortoiseGit (tgit-cmds)', { log: true });
     context.subscriptions.push(log);
+    log.info(`Activating TortoiseGit extension...`);
     TGit.setLogger(log);
 
     context.subscriptions.push(vscode.commands.registerCommand("tgit.fetch", () => TGit.fetch()));
